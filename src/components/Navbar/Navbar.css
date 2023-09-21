@@ -45,3 +45,14 @@
 .navbar_links > a {
   margin: 15px;
 }
+
+.cart_counter {
+  justify-content: center;
+  background-color: #6457f9;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  font-size: 15px;
+  margin-left: 5px;
+  color: white;
+}

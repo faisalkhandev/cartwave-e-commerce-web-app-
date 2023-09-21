@@ -22,8 +22,12 @@ const Navbar = () => {
         <Links title="Products" link="/" emoji="✨" />
         <Links title="SignUp" link="/" emoji="📝" />
         <Links title="LogIn" link="/" emoji="🆔" />
-        <Links title="My Orders" link="/" emoji="🗳" />
+        <Links title="My Orders" link="/" emoji="📦" />
         <Links title="LogOut" link="/" emoji="🚪" />
+        <a href="/cart" className="align_center">
+          Cart
+          <p className="align_center cart_counter">0</p>
+        </a>
       </div>
     </nav>
   );
