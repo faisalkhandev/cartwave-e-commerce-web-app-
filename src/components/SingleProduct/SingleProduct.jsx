@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./SingleProduct.css";
+import QualityInput from "./QualityInput";
 
 const product = {
   id: 1,
@@ -37,6 +38,18 @@ const SingleProduct = () => {
           alt={product.title}
           className="single_product_display"
         />
+      </div>
+      <div className="single_product_details">
+        <h1 className="single_product_title">{product.title}</h1>
+        <p className="single_product_description">{product.description}</p>
+        <p className="single_product_price">${product.price.toFixed(2)}</p>
+
+        <h2 className="quantity_title">Quantity:</h2>
+        <div className="align_center quantity_input">
+          <QualityInput />
+        </div>
+
+        <button className="search_button add_cart">Add to Cart</button>
       </div>
     </section>
   );
