@@ -6,7 +6,9 @@ const Navbar = () => {
   return (
     <nav className="align_center navbar">
       <div className="align_center">
-        <h1 className=" align_center navbar_heading">CartWave</h1>
+        <h1 className=" align_center navbar_heading">
+          <NavLink to="/">CartWave</NavLink>
+        </h1>
         <form className="align_center navbar_form">
           <input
             type="text"

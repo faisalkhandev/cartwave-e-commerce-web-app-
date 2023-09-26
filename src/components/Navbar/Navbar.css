@@ -42,6 +42,28 @@
   font-size: 15px;
 }
 
+.navbar_links > a.active {
+  font-weight: 600;
+  background-color: lightblue;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* transition: all 0.3s ease-out; */
+  animation-name: example;
+  animation-duration: 6s;
+}
+
+@keyframes example {
+  from {
+    background-color: red;
+    color: white;
+  }
+  to {
+    background-color: yellow;
+    color: black;
+  }
+}
+
 .navbar_links > a {
   margin: 15px;
 }
