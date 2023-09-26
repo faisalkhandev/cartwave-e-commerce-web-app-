@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Links from "./Links";
 import "./Navbar.css";
 
@@ -19,15 +20,15 @@ const Navbar = () => {
       </div>
       <div className="align_center navbar_links">
         <Links title="Home" link="/" emoji="🚀" />
-        <Links title="Products" link="/" emoji="✨" />
-        <Links title="SignUp" link="/" emoji="📝" />
-        <Links title="LogIn" link="/" emoji="🆔" />
-        <Links title="My Orders" link="/" emoji="📦" />
-        <Links title="LogOut" link="/" emoji="🚪" />
-        <a href="/cart" className="align_center">
+        <Links title="Products" link="/products" emoji="✨" />
+        <Links title="SignUp" link="/signup" emoji="📝" />
+        <Links title="LogIn" link="/login" emoji="🆔" />
+        <Links title="My Orders" link="/myorders" emoji="📦" />
+        <Links title="LogOut" link="/logout" emoji="🚪" />
+        <NavLink to="/cart" className="align_center">
           Cart
           <p className="align_center cart_counter">0</p>
-        </a>
+        </NavLink>
       </div>
     </nav>
   );
