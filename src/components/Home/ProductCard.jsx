@@ -8,7 +8,7 @@ const ProductCard = ({ id, title, image, stock, price, rate, rateCount }) => {
   return (
     <article className="product_card">
       <div className="product_image">
-        <NavLink to={`/product/${id}`}>
+        <NavLink to={`/products/${id}`}>
           <img
             src={`http://localhost:5000/products/${image}`}
             alt="product image"

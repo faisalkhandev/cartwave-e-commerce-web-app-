@@ -12,7 +12,7 @@ const Routing = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/products" element={<ProductsPage />} />
-      <Route path="/products/1" element={<SingleProduct />} />
+      <Route path="/products/:id" element={<SingleProduct />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
       <Route path="/myorders" element={<MyOrderPage />} />
