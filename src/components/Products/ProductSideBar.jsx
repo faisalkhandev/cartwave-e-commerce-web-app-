@@ -18,7 +18,7 @@ const ProductSideBar = () => {
               key={category._id}
               sidebar={true}
               title={category.name}
-              link={`/product?category=${category.name}`}
+              link={`/products?category=${category.name}`}
               image={`http://localhost:5000/category/${category.image}`}
             />
           ))}

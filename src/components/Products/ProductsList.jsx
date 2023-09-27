@@ -3,21 +3,20 @@ import "./ProductsList.css";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import ProductCard from "./../Home/ProductCard";
 import useData from "../Hooks/useData";
-// import { useSearchParams } from "react-router-dom";
-// import Skeleton from "react-loading-skeleton";
+import { useSearchParams } from "react-router-dom";
 
 const ProductsList = () => {
-  // const [search, setSearch] = useSearchParams();
-  // const category = search.get("category");
+  const [search, setSearch] = useSearchParams();
+  const category = search.get("category");
 
   const { data, error, isLoading } = useData(
     "/products",
     {
       params: {
-        category: "Laptops",
+        category: category,
       },
     },
-    []
+    [category]
   );
 
   const skeletonArr = [1, 2, 3, 4, 5, 6, 7, 8];
