@@ -2,9 +2,10 @@ import "./SignUp.css";
 import user from "../../../public/user.png";
 
 import { useForm } from "react-hook-form";
-import z from "zod";
+import z, { set } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { registerUser } from "../Services/userServices";
 
 const schema = z.object({
   name: z.string().min(5, { message: "Enter at least 5 characters" }),
@@ -24,8 +25,8 @@ const schema = z.object({
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
+  const [formError, setFormError] = useState("");
 
-  console.log(profilePic);
   const {
     register,
     handleSubmit,
@@ -34,8 +35,14 @@ const SignUp = () => {
     resolver: zodResolver(schema),
   });
 
-  function onSubmit(formData) {
-    console.log(formData);
+  async function onSubmit(formData) {
+    try {
+      await registerUser(formData, profilePic);
+      console.log("data de laraaaa");
+    } catch (error) {
+      console.log(setFormError(error.response.data.message));
+      console.log("helo");
+    }
   }
   return (
     <section className="align_center form_page">
@@ -138,8 +145,10 @@ const SignUp = () => {
           </div>
         </div>
 
+        {formError && <em className="form_error">No form error</em>}
+
         <button className="search_button form_submit" type="submit">
-          Submit
+          Sign Up
         </button>
       </form>
     </section>
