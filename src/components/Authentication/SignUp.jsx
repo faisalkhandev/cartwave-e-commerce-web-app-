@@ -2,10 +2,11 @@ import "./SignUp.css";
 import user from "../../../public/user.png";
 
 import { useForm } from "react-hook-form";
-import z, { set } from "zod";
+import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { registerUser } from "../Services/userServices";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
   name: z.string().min(5, { message: "Enter at least 5 characters" }),
@@ -26,6 +27,7 @@ const schema = z.object({
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [formError, setFormError] = useState("");
+  const navigate = useNavigate();
 
   const {
     register,
@@ -37,11 +39,11 @@ const SignUp = () => {
 
   async function onSubmit(formData) {
     try {
-      await registerUser(formData, profilePic);
-      console.log("data de laraaaa");
+      const { data: Data } = await registerUser(formData, profilePic);
+      localStorage.setItem("token", Data.token);
+      navigate("/");
     } catch (error) {
       console.log(setFormError(error.response.data.message));
-      console.log("helo");
     }
   }
   return (
