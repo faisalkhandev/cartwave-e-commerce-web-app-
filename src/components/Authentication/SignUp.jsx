@@ -145,7 +145,7 @@ const SignUp = () => {
           </div>
         </div>
 
-        {formError && <em className="form_error">No form error</em>}
+        {formError && <em className="form_error email_error">{formError}</em>}
 
         <button className="search_button form_submit" type="submit">
           Sign Up

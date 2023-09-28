@@ -8,5 +8,5 @@ export function registerUser(user, profile) {
   body.append("deliveryAddress", user.deliveryAddress);
   body.append("profilePic", profile);
 
-  apiClient.post("/user/signup", body);
+  return apiClient.post("/user/signup", body);
 }

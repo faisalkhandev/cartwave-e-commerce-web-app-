@@ -64,6 +64,9 @@
 
 .form_submit {
   padding: 10px 10px;
+}
+
+.email_error {
   display: flex;
-  flex-direction: column;
+  margin-bottom: 10px;
 }
