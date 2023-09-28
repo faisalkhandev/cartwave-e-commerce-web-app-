@@ -3,16 +3,19 @@ import "./SingleProduct.css";
 import QualityInput from "./QualityInput";
 import { useParams } from "react-router-dom";
 import useData from "../Hooks/useData";
+import PreLoader from "../PreLoader/PreLoader";
 
 const SingleProduct = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const { id } = useParams();
   const { data: product, error, isLoading } = useData(`/products/${id}`);
 
+  const [quantity, setQuantity] = useState(1);
   return (
     <section className="align_center single_product">
       {error && <em className="form_error">{error}</em>}
-      {/* {isLoading && } */}
+      {isLoading && <PreLoader />}
+
       {product && (
         <>
           <div className="align_center">
@@ -37,10 +40,13 @@ const SingleProduct = () => {
             <h1 className="single_product_title">{product.title}</h1>
             <p className="single_product_description">{product.description}</p>
             <p className="single_product_price">${product.price.toFixed(2)}</p>
-
             <h2 className="quantity_title">Quantity:</h2>
             <div className="align_center quantity_input">
-              <QualityInput />
+              <QualityInput
+                quantity={quantity}
+                setQuantity={setQuantity}
+                stock={product.stock}
+              />
             </div>
 
             <button className="search_button add_cart">Add to Cart</button>
