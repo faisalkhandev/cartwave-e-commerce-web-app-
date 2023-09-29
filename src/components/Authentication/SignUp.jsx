@@ -14,10 +14,12 @@ const schema = z.object({
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters" }),
-  confirmPassword: z.string().min(8),
   address: z
     .string()
-    .min(15, { message: "Please Enter at least 15 characters " })
+    .min(15, { message: "Please Enter at least 15 characters " }),
+  confirmPassword: z
+    .string()
+    .min(8)
     .refine((data) => data.password === data.confirmPassword, {
       message: "The confirm password doesn't match",
       path: ["confirmPassword"],
@@ -43,7 +45,7 @@ const SignUp = () => {
       localStorage.setItem("token", Data.token);
       navigate("/");
     } catch (error) {
-      console.log(setFormError(error.response.data.message));
+      setFormError(error.response.data.message);
     }
   }
   return (
@@ -119,9 +121,9 @@ const SignUp = () => {
           </div>
 
           <div>
-            <label htmlFor="cpassword">Confirm Password</label>
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <input
-              id="cpassword"
+              id="confirmPassword"
               className="form_text_input"
               type="password"
               placeholder="Enter confirm password"
