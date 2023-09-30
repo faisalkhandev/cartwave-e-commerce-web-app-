@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom";
 import Links from "./Links";
 import "./Navbar.css";
 
-const Navbar = () => {
+// eslint-disable-next-line react/prop-types
+const Navbar = ({ user }) => {
   return (
     <nav className="align_center navbar">
       <div className="align_center">
@@ -23,14 +24,24 @@ const Navbar = () => {
       <div className="align_center navbar_links">
         <Links title="Home" link="/" emoji="🚀" />
         <Links title="Products" link="/products" emoji="✨" />
-        <Links title="SignUp" link="/signup" emoji="📝" />
-        <Links title="LogIn" link="/login" emoji="🆔" />
-        <Links title="My Orders" link="/myorders" emoji="📦" />
-        <Links title="LogOut" link="/logout" emoji="🚪" />
-        <NavLink to="/cart" className="align_center">
-          Cart
-          <p className="align_center cart_counter">0</p>
-        </NavLink>
+        {!user && (
+          <>
+            {" "}
+            <Links title="SignUp" link="/signup" emoji="📝" />
+            <Links title="LogIn" link="/login" emoji="🆔" />{" "}
+          </>
+        )}
+        {user && (
+          <>
+            {" "}
+            <Links title="My Orders" link="/myorders" emoji="📦" />
+            <Links title="LogOut" link="/logout" emoji="🚪" />
+            <NavLink to="/cart" className="align_center">
+              Cart
+              <p className="align_center cart_counter">0</p>
+            </NavLink>{" "}
+          </>
+        )}
       </div>
     </nav>
   );

@@ -29,7 +29,6 @@ const schema = z.object({
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [formError, setFormError] = useState("");
-  const navigate = useNavigate();
 
   const {
     register,
@@ -43,7 +42,7 @@ const SignUp = () => {
     try {
       const { data: Data } = await registerUser(formData, profilePic);
       localStorage.setItem("token", Data.token);
-      navigate("/");
+      window.location = "/";
     } catch (error) {
       setFormError(error.response.data.message);
     }

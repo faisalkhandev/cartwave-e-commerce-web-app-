@@ -24,7 +24,7 @@ const Login = () => {
     try {
       const { data: Data } = await loginUser(formData);
       localStorage.setItem("token", Data.token);
-      navigate("/");
+      window.location = "/";
     } catch (error) {
       setFormError(error.response.data.message);
     }
