@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import "./CartPage.css";
 
 import user from "../../../public/user.png";
@@ -5,8 +7,20 @@ import remove from "../../../public/remove.png";
 
 import QualityInput from "./../SingleProduct/QualityInput";
 import Table from "../Common/Table";
+import { useEffect, useState } from "react";
 
-const CartPage = () => {
+// eslint-disable-next-line react/prop-types
+const CartPage = ({ cart }) => {
+  const [subTotal, setSubTotal] = useState(0);
+  useEffect(() => {
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.product.price;
+    });
+
+    setSubTotal(total);
+  }, [cart]);
+
   return (
     <section className="align_center cart_page">
       <div className="align_center user_info">
@@ -19,21 +33,29 @@ const CartPage = () => {
 
       <Table headings={["Item", "Price", "Quantity", "Total", "Remove"]}>
         <tbody>
-          <tr>
-            <td>iPhone 14</td>
-            <td>$999</td>
-            <td className="align_center table_quantity_input">
-              <QualityInput />
-            </td>
-            <td>$999</td>
-            <td>
-              <img
-                src={remove}
-                alt="remove icon"
-                className="cart_remove_icon"
-              />
-            </td>
-          </tr>
+          {cart.map(({ product, quantity }) => (
+            <tr key={product._id}>
+              <td>
+                <b>{product.title}</b>
+              </td>
+              <td>
+                <b>${product.price}</b>
+              </td>
+              <td className="align_center table_quantity_input">
+                <QualityInput quantity={quantity} stock={product.stock} />
+              </td>
+              <td>
+                <b>{quantity * product.price}</b>
+              </td>
+              <td>
+                <img
+                  src={remove}
+                  alt="remove icon"
+                  className="cart_remove_icon"
+                />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
 
@@ -41,7 +63,7 @@ const CartPage = () => {
         <tbody>
           <tr>
             <td>Subtotal</td>
-            <td>$999</td>
+            <td>${subTotal}</td>
           </tr>
           <tr>
             <td>Shipping Charge</td>
@@ -49,7 +71,7 @@ const CartPage = () => {
           </tr>
           <tr className="cart_bill_final">
             <td>Total</td>
-            <td>$1004</td>
+            <td>${subTotal + 5}</td>
           </tr>
         </tbody>
       </table>

@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
 import "./App.css";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Routing from "./components/Routing/Routing";
 import jwtDecode from "jwt-decode";
-import setToken from "./components/utils/setAuthToken";
+import { addToCartAPI, getCartPI } from "./components/Services/cartServices";
+import setAuthToken from "./components/utils/setAuthToken";
+import "react-toastify/dist/ReactToastify.css";
 
-setToken(localStorage.getItem("token"));
+setAuthToken(localStorage.getItem("token"));
 
 function App() {
   const [user, setUser] = useState(null);
@@ -45,13 +49,35 @@ function App() {
     }
 
     setCart(updateCart);
+
+    addToCartAPI(product._id, quantity)
+      .then((res) => {
+        toast.success("product added sucessfully");
+      })
+      .catch((err) => {
+        toast.error(err.response);
+        setCart(cart);
+      });
   }
+
+  function getCart() {
+    getCartPI()
+      .then((res) => setCart(res.data))
+      .catch((err) => toast.error(err.response.meesage));
+  }
+
+  useEffect(() => {
+    if (user) {
+      getCart();
+    }
+  }, [user]);
 
   return (
     <div className="app">
       <Navbar user={user} cartCount={cart.length} />
       <main>
-        <Routing addToCart={addToCart} />
+        <ToastContainer position="bottom-right" />
+        <Routing addToCart={addToCart} cart={cart} />
       </main>
     </div>
   );

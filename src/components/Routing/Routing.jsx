@@ -9,7 +9,7 @@ import CartPage from "./../Cart/CartPage";
 import LogOut from "../Authentication/LogOut";
 
 // eslint-disable-next-line react/prop-types
-const Routing = ({ addToCart }) => {
+const Routing = ({ addToCart, cart }) => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -21,7 +21,7 @@ const Routing = ({ addToCart }) => {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
       <Route path="/myorders" element={<MyOrderPage />} />
-      <Route path="/cart" element={<CartPage />} />
+      <Route path="/cart" element={<CartPage cart={cart} />} />
       <Route path="/logout" element={<LogOut />} />
     </Routes>
   );

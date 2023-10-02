@@ -1,6 +1,6 @@
 import apiClient from "./api-client";
 
-function setToken(token) {
+function setAuthToken(token) {
   if (token) {
     apiClient.defaults.headers.common["x-auth-token"] = token;
   } else {
@@ -8,4 +8,4 @@ function setToken(token) {
   }
 }
 
-export default setToken;
+export default setAuthToken;

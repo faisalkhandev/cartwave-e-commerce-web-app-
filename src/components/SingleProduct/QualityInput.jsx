@@ -12,7 +12,9 @@ const QualityInput = ({ quantity, setQuantity, stock }) => {
         {" "}
         -{" "}
       </button>
-      <p className="quantity_input_count">{quantity}</p>
+      <p className="quantity_input_count">
+        <b>{quantity}</b>
+      </p>
       <button
         className="quantity_input_button"
         disabled={quantity === stock}
