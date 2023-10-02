@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import useData from "../Hooks/useData";
 import PreLoader from "../PreLoader/PreLoader";
 
-const SingleProduct = () => {
+// eslint-disable-next-line react/prop-types
+const SingleProduct = ({ addToCart }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const { id } = useParams();
   const { data: product, error, isLoading } = useData(`/products/${id}`);
@@ -49,7 +50,14 @@ const SingleProduct = () => {
               />
             </div>
 
-            <button className="search_button add_cart">Add to Cart</button>
+            <button
+              className="search_button add_cart"
+              onClick={() => {
+                addToCart(product, quantity);
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
         </>
       )}

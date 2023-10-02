@@ -3,7 +3,7 @@ import Links from "./Links";
 import "./Navbar.css";
 
 // eslint-disable-next-line react/prop-types
-const Navbar = ({ user }) => {
+const Navbar = ({ user, cartCount }) => {
   return (
     <nav className="align_center navbar">
       <div className="align_center">
@@ -38,8 +38,8 @@ const Navbar = ({ user }) => {
             <Links title="LogOut" link="/logout" emoji="🚪" />
             <NavLink to="/cart" className="align_center">
               Cart
-              <p className="align_center cart_counter">0</p>
-            </NavLink>{" "}
+              <p className="align_center cart_counter">{cartCount}</p>
+            </NavLink>
           </>
         )}
       </div>

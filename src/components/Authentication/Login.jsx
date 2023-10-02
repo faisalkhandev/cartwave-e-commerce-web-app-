@@ -17,7 +17,6 @@ const Login = () => {
     resolver: zodResolver(schema),
   });
   const [formError, setFormError] = useState("");
-  const navigate = useNavigate();
 
   // console.log(register);
   async function onSubmit(formData) {
@@ -60,7 +59,7 @@ const Login = () => {
           </div>
           {formError && <em className="form_error email_error">{formError}</em>}
           <button type="submit" className="search_button submit_form">
-            Submit
+            Login
           </button>
         </div>
       </form>

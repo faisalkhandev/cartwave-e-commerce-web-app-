@@ -8,12 +8,16 @@ import MyOrderPage from "./../MyOrder/MyOrderPage";
 import CartPage from "./../Cart/CartPage";
 import LogOut from "../Authentication/LogOut";
 
-const Routing = () => {
+// eslint-disable-next-line react/prop-types
+const Routing = ({ addToCart }) => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/products" element={<ProductsPage />} />
-      <Route path="/products/:id" element={<SingleProduct />} />
+      <Route
+        path="/products/:id"
+        element={<SingleProduct addToCart={addToCart} />}
+      />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
       <Route path="/myorders" element={<MyOrderPage />} />
