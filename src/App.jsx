@@ -10,6 +10,7 @@ import setAuthToken from "./components/utils/setAuthToken";
 import "react-toastify/dist/ReactToastify.css";
 import userContext from "./components/Contexts/userContext";
 import cartContext from "./components/Contexts/cartContext";
+import { removeCartItemAPI } from "./components/Services/cartServices";
 
 setAuthToken(localStorage.getItem("token"));
 
@@ -68,6 +69,19 @@ function App() {
       .catch((err) => toast.error(err.response.meesage));
   }
 
+  function removeCartItem(id) {
+    const oldCart = [...cart];
+    const newCart = oldCart.filter((item) => item.product._id !== id);
+    setCart(newCart);
+
+    removeCartItemAPI(id)
+      .then(() => toast.error("Product removed successfully"))
+      .catch(() => {
+        toast.error("Something went wrong");
+        setCart(oldCart);
+      });
+  }
+
   useEffect(() => {
     if (user) {
       getCart();
@@ -76,7 +90,7 @@ function App() {
 
   return (
     <userContext.Provider value={user}>
-      <cartContext.Provider value={{ cart, addToCart }}>
+      <cartContext.Provider value={{ cart, addToCart, removeCartItem }}>
         <div className="app">
           <Navbar />
           <main>
