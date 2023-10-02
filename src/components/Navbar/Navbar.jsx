@@ -1,9 +1,14 @@
 import { NavLink } from "react-router-dom";
 import Links from "./Links";
 import "./Navbar.css";
+import { useContext } from "react";
+import userContext from "../Contexts/userContext";
+import cartContext from "../Contexts/cartContext";
 
 // eslint-disable-next-line react/prop-types
-const Navbar = ({ user, cartCount }) => {
+const Navbar = () => {
+  const user = useContext(userContext);
+  const { cart } = useContext(cartContext);
   return (
     <nav className="align_center navbar">
       <div className="align_center">
@@ -38,7 +43,7 @@ const Navbar = ({ user, cartCount }) => {
             <Links title="LogOut" link="/logout" emoji="🚪" />
             <NavLink to="/cart" className="align_center">
               Cart
-              <p className="align_center cart_counter">{cartCount}</p>
+              <p className="align_center cart_counter">{cart.length}</p>
             </NavLink>
           </>
         )}

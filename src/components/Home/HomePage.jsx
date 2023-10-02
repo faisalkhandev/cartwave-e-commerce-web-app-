@@ -2,6 +2,7 @@ import HeroSection from "./HeroSection";
 import iphone from "../../../public/iphone_15.png";
 import mac from "../../../public/macbook.png";
 import FeatureProducts from "./FeatureProducts";
+import { ToastContainer } from "react-toastify";
 
 const HomePage = () => {
   return (

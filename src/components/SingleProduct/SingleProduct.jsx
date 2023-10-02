@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./SingleProduct.css";
 import QualityInput from "./QualityInput";
 import { useParams } from "react-router-dom";
 import useData from "../Hooks/useData";
 import PreLoader from "../PreLoader/PreLoader";
+import cartContext from "../Contexts/cartContext";
 
 // eslint-disable-next-line react/prop-types
-const SingleProduct = ({ addToCart }) => {
+const SingleProduct = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const { id } = useParams();
-  const { data: product, error, isLoading } = useData(`/products/${id}`);
 
+  const { data: product, error, isLoading } = useData(`/products/${id}`);
   const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useContext(cartContext);
   return (
     <section className="align_center single_product">
       {error && <em className="form_error">{error}</em>}

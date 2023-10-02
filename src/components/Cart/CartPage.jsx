@@ -2,16 +2,20 @@
 
 import "./CartPage.css";
 
-import user from "../../../public/user.png";
 import remove from "../../../public/remove.png";
 
 import QualityInput from "./../SingleProduct/QualityInput";
 import Table from "../Common/Table";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import userContext from "../Contexts/userContext";
+import cartContext from "../Contexts/cartContext";
 
 // eslint-disable-next-line react/prop-types
-const CartPage = ({ cart }) => {
+const CartPage = () => {
   const [subTotal, setSubTotal] = useState(0);
+  const user = useContext(userContext);
+  const { cart, addToCart } = useContext(cartContext);
+
   useEffect(() => {
     let total = 0;
     cart.forEach((item) => {
@@ -24,10 +28,13 @@ const CartPage = ({ cart }) => {
   return (
     <section className="align_center cart_page">
       <div className="align_center user_info">
-        <img src={user} alt="user profile" />
+        <img
+          src={`http://localhost:5000/profile/${user?.profilePic}`}
+          alt="user profile"
+        />
         <div>
-          <p className="user_name">Harley</p>
-          <p className="user_email">harley@gmail.com</p>
+          <p className="user_name">Name: {user?.name}</p>
+          <p className="user_email">Email: {user?.email}</p>
         </div>
       </div>
 
