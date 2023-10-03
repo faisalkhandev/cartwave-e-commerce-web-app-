@@ -37,6 +37,8 @@ function App() {
   }, []);
 
   function addToCart(product, quantity) {
+    console.log("Product:", product);
+    console.log("Quantity:", quantity);
     const updateCart = [...cart];
     const productIndex = updateCart.findIndex(
       (item) => item.product._id === product._id
@@ -54,7 +56,7 @@ function App() {
     setCart(updateCart);
 
     addToCartAPI(product._id, quantity)
-      .then((res) => {
+      .then(() => {
         toast.success("product added sucessfully");
       })
       .catch((err) => {
@@ -81,6 +83,38 @@ function App() {
         setCart(oldCart);
       });
   }
+  // function updateCart(type, id) {
+  //   const updatedCart = [...cart];
+  //   const productIndex = updatedCart.filter((item) => item.product._id === id);
+
+  //   if (type === "increase") {
+  //     updatedCart[productIndex].quantity += 1;
+  //     setCart(updatedCart);
+  //   }
+
+  //   if (type === "decrease") {
+  //     updatedCart[productIndex].quantity -= 1;
+  //     setCart(updatedCart);
+  //   }
+  // }
+  function updateCart(type, id) {
+    const updatedCart = [...cart];
+    const productIndex = updatedCart.findIndex(
+      (item) => item.product._id === id
+    );
+
+    if (productIndex !== -1) {
+      if (type === "increase") {
+        updatedCart[productIndex].quantity += 1;
+      }
+
+      if (type === "decrease" && updatedCart[productIndex].quantity > 0) {
+        updatedCart[productIndex].quantity -= 1;
+      }
+
+      setCart(updatedCart);
+    }
+  }
 
   useEffect(() => {
     if (user) {
@@ -90,7 +124,9 @@ function App() {
 
   return (
     <userContext.Provider value={user}>
-      <cartContext.Provider value={{ cart, addToCart, removeCartItem }}>
+      <cartContext.Provider
+        value={{ cart, addToCart, removeCartItem, updateCart }}
+      >
         <div className="app">
           <Navbar />
           <main>

@@ -14,7 +14,7 @@ import cartContext from "../Contexts/cartContext";
 const CartPage = () => {
   const [subTotal, setSubTotal] = useState(0);
   const user = useContext(userContext);
-  const { cart, removeCartItem } = useContext(cartContext);
+  const { cart, removeCartItem, updateCart } = useContext(cartContext);
 
   useEffect(() => {
     let total = 0;
@@ -49,7 +49,13 @@ const CartPage = () => {
                 <b>${product.price}</b>
               </td>
               <td className="align_center table_quantity_input">
-                <QualityInput quantity={quantity} stock={product.stock} />
+                <QualityInput
+                  quantity={quantity}
+                  stock={product.stock}
+                  setQuantity={updateCart}
+                  cartPage={true}
+                  productId={product._id}
+                />
               </td>
               <td>
                 <b>{quantity * product.price}</b>

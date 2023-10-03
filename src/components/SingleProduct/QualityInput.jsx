@@ -1,13 +1,25 @@
+/* eslint-disable react/prop-types */
 import "./QualityInput.css";
 
 // eslint-disable-next-line react/prop-types
-const QualityInput = ({ quantity, setQuantity, stock }) => {
+const QualityInput = ({
+  quantity,
+  setQuantity,
+  stock,
+  cartPage,
+  productId,
+}) => {
   return (
     <>
       <button
         className="quantity_input_button"
         disabled={quantity <= 1}
-        onClick={() => setQuantity(quantity - 1)}
+        onClick={() => {
+          console.log("working broskii");
+          cartPage
+            ? setQuantity("decrease", productId)
+            : setQuantity(quantity - 1);
+        }}
       >
         {" "}
         -{" "}
@@ -18,7 +30,11 @@ const QualityInput = ({ quantity, setQuantity, stock }) => {
       <button
         className="quantity_input_button"
         disabled={quantity === stock}
-        onClick={() => setQuantity(quantity + 1)}
+        onClick={() => {
+          cartPage
+            ? setQuantity("increase", productId)
+            : setQuantity(quantity + 1);
+        }}
       >
         {" "}
         +{" "}
