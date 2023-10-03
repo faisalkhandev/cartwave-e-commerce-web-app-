@@ -4,9 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import "./Login.css";
 import { useState } from "react";
-import { loginUser } from "../Services/userServices";
-
-import { toast } from "react-toastify";
+import { getUser, loginUser } from "../Services/userServices";
+import { Navigate, useLocation } from "react-router-dom";
 
 const schema = z.object({
   email: z.string().email({ message: "Please Enter The Valid Message" }).min(6),
@@ -24,10 +23,15 @@ const Login = () => {
     try {
       const { data: Data } = await loginUser(formData);
       localStorage.setItem("token", Data.token);
+
       window.location = "/";
     } catch (error) {
       setFormError(error.response.data.message);
     }
+  }
+
+  if (getUser()) {
+    return <Navigate to="/" />;
   }
 
   return (

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import "./HeroSection.css";
 
 const HeroSection = ({ title, subtitle, image, link }) => {
@@ -7,9 +8,9 @@ const HeroSection = ({ title, subtitle, image, link }) => {
       <div className="align_center">
         <h2 className="hero_heading">{title}</h2>
         <p className="hero_subheading">{subtitle}</p>
-        <a href={link} className="hero_link">
+        <Link to={link} className="hero_link">
           Buy Now
-        </a>
+        </Link>
       </div>
       <div className="align_center">
         <img src={image} className="hero_image"></img>
