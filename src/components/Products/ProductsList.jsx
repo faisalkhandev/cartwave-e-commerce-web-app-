@@ -5,27 +5,32 @@ import ProductCard from "./../Home/ProductCard";
 import useData from "../Hooks/useData";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../Common/Pagination";
+import { useEffect } from "react";
 
 const ProductsList = () => {
   const [search, setSearch] = useSearchParams();
   const category = search.get("category");
   const page = search.get("page");
+  const searchQuery = search.get("search");
 
   const { data, error, isLoading } = useData(
     "/products",
     {
       params: {
+        search: searchQuery,
         category: category,
         page: page,
       },
     },
-    [category, page]
+    [searchQuery, category, page]
   );
 
   function handlePagination(page) {
     const currentParams = Object.fromEntries([...search]);
     setSearch({ ...currentParams, page: page });
   }
+
+  useEffect(() => {}, [searchQuery]);
 
   const skeletonArr = [1, 2, 3, 4, 5, 6, 7, 8];
 
