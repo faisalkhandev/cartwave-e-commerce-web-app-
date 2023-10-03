@@ -29,13 +29,15 @@ const CartPage = () => {
 
   function checkOut() {
     const oldCart = [...cart];
-    checkOutAPI().then(() => {
-      toast.success("Order place successfully");
-      setCart([]).catch(() => {
+    checkOutAPI()
+      .then(() => {
+        toast.success("Order place successfully");
+        setCart([]);
+      })
+      .catch(() => {
         toast.error("somthing went wrong");
         setCart(oldCart);
       });
-    });
   }
 
   return (
