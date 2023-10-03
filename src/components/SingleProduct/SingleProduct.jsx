@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import useData from "../Hooks/useData";
 import PreLoader from "../PreLoader/PreLoader";
 import cartContext from "../Contexts/cartContext";
+import userContext from "../Contexts/userContext";
 
 // eslint-disable-next-line react/prop-types
 const SingleProduct = () => {
@@ -15,6 +16,8 @@ const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
 
   const { addToCart } = useContext(cartContext);
+  const user = useContext(userContext);
+
   return (
     <section className="align_center single_product">
       {error && <em className="form_error">{error}</em>}
@@ -44,23 +47,29 @@ const SingleProduct = () => {
             <h1 className="single_product_title">{product.title}</h1>
             <p className="single_product_description">{product.description}</p>
             <p className="single_product_price">${product.price.toFixed(2)}</p>
-            <h2 className="quantity_title">Quantity:</h2>
-            <div className="align_center quantity_input">
-              <QualityInput
-                quantity={quantity}
-                setQuantity={setQuantity}
-                stock={product.stock}
-              />
-            </div>
 
-            <button
-              className="search_button add_cart"
-              onClick={() => {
-                addToCart(product, quantity);
-              }}
-            >
-              Add to Cart
-            </button>
+            {!user ? (
+              <h3 style={{ color: "red" }}>Bhai jan ID banao </h3>
+            ) : (
+              <>
+                <h2 className="quantity_title">Quantity:</h2>
+                <div className="align_center quantity_input">
+                  <QualityInput
+                    quantity={quantity}
+                    setQuantity={setQuantity}
+                    stock={product.stock}
+                  />
+                </div>
+                <button
+                  className="search_button add_cart"
+                  onClick={() => {
+                    addToCart(product, quantity);
+                  }}
+                >
+                  Add to Cart
+                </button>{" "}
+              </>
+            )}
           </div>
         </>
       )}

@@ -51,12 +51,7 @@ const ProductsList = () => {
               <ProductCard
                 key={product._id}
                 id={product._id}
-                title={product.title}
-                price={product.price}
-                stock={product.stock}
-                image={product.images[0]}
-                rate={product.reviews.rate}
-                ratingCount={product.reviews.count}
+                product={product}
               />
             ))}
       </div>

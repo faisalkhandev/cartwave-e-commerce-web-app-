@@ -5,7 +5,12 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Routing from "./components/Routing/Routing";
 import jwtDecode from "jwt-decode";
-import { addToCartAPI, getCartPI } from "./components/Services/cartServices";
+import {
+  addToCartAPI,
+  decreaseProductAPI,
+  getCartPI,
+  increaseProductAPI,
+} from "./components/Services/cartServices";
 import setAuthToken from "./components/utils/setAuthToken";
 import "react-toastify/dist/ReactToastify.css";
 import userContext from "./components/Contexts/userContext";
@@ -98,6 +103,7 @@ function App() {
   //   }
   // }
   function updateCart(type, id) {
+    const oldCart = [...cart];
     const updatedCart = [...cart];
     const productIndex = updatedCart.findIndex(
       (item) => item.product._id === id
@@ -106,10 +112,18 @@ function App() {
     if (productIndex !== -1) {
       if (type === "increase") {
         updatedCart[productIndex].quantity += 1;
+        increaseProductAPI(id).catch((err) => {
+          toast.error("Something Went Wrong");
+          setCart(oldCart);
+        });
       }
 
       if (type === "decrease" && updatedCart[productIndex].quantity > 0) {
         updatedCart[productIndex].quantity -= 1;
+        decreaseProductAPI(id).catch((err) => {
+          toast.error("somthing went wrong broskii");
+          setCart(oldCart);
+        });
       }
 
       setCart(updatedCart);
@@ -125,7 +139,7 @@ function App() {
   return (
     <userContext.Provider value={user}>
       <cartContext.Provider
-        value={{ cart, addToCart, removeCartItem, updateCart }}
+        value={{ cart, addToCart, removeCartItem, updateCart, setCart }}
       >
         <div className="app">
           <Navbar />
