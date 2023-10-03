@@ -7,6 +7,7 @@ import Login from "../Authentication/Login";
 import MyOrderPage from "./../MyOrder/MyOrderPage";
 import CartPage from "./../Cart/CartPage";
 import LogOut from "../Authentication/LogOut";
+import ProtectedRouting from "./ProtectedRouting";
 
 // eslint-disable-next-line react/prop-types
 const Routing = () => {
@@ -17,9 +18,11 @@ const Routing = () => {
       <Route path="/products/:id" element={<SingleProduct />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/myorders" element={<MyOrderPage />} />
-      <Route path="/cart" element={<CartPage />} />
-      <Route path="/logout" element={<LogOut />} />
+      <Route element={<ProtectedRouting />}>
+        <Route path="/myorders" element={<MyOrderPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/logout" element={<LogOut />} />
+      </Route>
     </Routes>
   );
 };

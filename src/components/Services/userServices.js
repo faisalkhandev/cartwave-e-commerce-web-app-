@@ -1,4 +1,7 @@
+import jwtDecode from "jwt-decode";
 import apiClient from "../utils/api-client";
+
+jwtDecode;
 
 export function registerUser(user, profile) {
   const body = new FormData();
@@ -13,4 +16,13 @@ export function registerUser(user, profile) {
 
 export function loginUser(user) {
   return apiClient.post("/user/login", user);
+}
+
+export function getUser() {
+  try {
+    const jwt = localStorage.getItem("token");
+    return jwtDecode(jwt);
+  } catch (error) {
+    return null;
+  }
 }
