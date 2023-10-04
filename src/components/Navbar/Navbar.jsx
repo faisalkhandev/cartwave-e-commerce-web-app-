@@ -48,15 +48,18 @@ const Navbar = () => {
   }
 
   useEffect(() => {
-    if (search.trim() !== "") {
-      getSuggestionAPI(search)
-        .then((res) => {
-          setSuggestion(res.data);
-        })
-        .catch(() => {
-          toast.error("Something went wrong");
-        });
-    }
+    const delaySuggestion = setTimeout(() => {
+      if (search.trim() !== "") {
+        getSuggestionAPI(search)
+          .then((res) => {
+            setSuggestion(res.data);
+          })
+          .catch(() => {
+            toast.error("Something went wrong");
+          });
+      }
+      return () => clearTimeout(delaySuggestion);
+    }, 300);
   }, [search]);
   // console.log(suggestion);
 
@@ -94,7 +97,7 @@ const Navbar = () => {
                     setSuggestion([]);
                   }}
                 >
-                  <Link to={`/products?search?=${suggestion.title}`}>
+                  <Link to={`/products?search=${suggestion.title}`}>
                     {suggestion.title}
                   </Link>
                 </li>
