@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./ProductCard.css";
-
+import config from "../../config.json";
 import mac from "../../../public/white-star.png";
 import basket from "../../../public/basket.png";
 import { NavLink } from "react-router-dom";
@@ -15,7 +15,7 @@ const ProductCard = ({ product, id }) => {
       <div className="product_image">
         <NavLink to={`/products/${id}`}>
           <img
-            src={`http://localhost:5000/products/${product?.images[0]}`}
+            src={`${config.backendURL}/products/${product?.images[0]}`}
             alt="product image"
           />
         </NavLink>

@@ -1,4 +1,5 @@
 import useData from "../Hooks/useData";
+import confiq from "../../config.json";
 import Links from "../Navbar/Links";
 import "./ProductSideBar.css";
 
@@ -19,7 +20,7 @@ const ProductSideBar = () => {
               sidebar={true}
               title={category.name}
               link={`/products?category=${category.name}`}
-              image={`http://localhost:5000/category/${category.image}`}
+              image={`${confiq.backendURL}/category/${category.image}`}
             />
           ))}
       </div>
