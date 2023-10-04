@@ -59,7 +59,7 @@
 .search_suggestion_link > a {
   width: 100%;
   padding: 10px 20px;
-  font-size: 18px;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .navbar_links {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .navbar_links > a {
@@ -80,13 +80,13 @@
   font-weight: 600;
 }
 
-.cart_counts {
-  justify-content: center;
+.cart_counter {
+  background-color: #6457f9;
   width: 20px;
   height: 20px;
   border-radius: 100%;
-  background-color: #6457f9;
-  color: #fff;
   font-size: 15px;
   margin-left: 5px;
+  color: white;
+  justify-content: center;
 }

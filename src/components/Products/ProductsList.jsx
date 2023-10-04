@@ -12,6 +12,7 @@ const ProductsList = () => {
   const category = search.get("category");
   const page = search.get("page");
   const searchQuery = search.get("search");
+  console.log(searchQuery);
 
   const { data, error, isLoading } = useData(
     "/products",
@@ -30,7 +31,7 @@ const ProductsList = () => {
     setSearch({ ...currentParams, page: page });
   }
 
-  useEffect(() => {}, [searchQuery]);
+  // useEffect(() => {}, [searchQuery]);
 
   const skeletonArr = [1, 2, 3, 4, 5, 6, 7, 8];
 

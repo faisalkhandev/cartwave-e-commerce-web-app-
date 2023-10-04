@@ -13,6 +13,7 @@ const Navbar = () => {
   const { cart } = useContext(cartContext);
   const [search, setSearch] = useState("");
   const [suggestion, setSuggestion] = useState([]);
+  const [selected, setSelected] = useState(-1);
 
   const navigate = useNavigate();
   // console.log(search);
@@ -20,9 +21,30 @@ const Navbar = () => {
   function handleSearch(e) {
     e.preventDefault();
     if (search.trim() !== "") {
-      navigate(`/products?search=${search.trim()}`);
+      navigate(`/products?search=${search}`);
     }
     setSuggestion([]);
+  }
+
+  function handleKeys(e) {
+    if (selected < suggestion.length) {
+      if (e.key === "ArrowDown") {
+        setSelected((current) =>
+          current === suggestion.length ? current - 1 : current + 1
+        );
+      } else if (e.key === "ArrowUp") {
+        setSelected((current) =>
+          current === suggestion.length ? current + 1 : current - 1
+        );
+      } else if (e.key === "Enter" && selected > -1) {
+        const suggest = suggestion[selected];
+        navigate(`/products?search=${suggest.title}`);
+        setSuggestion([]);
+        setSearch("");
+      }
+    } else {
+      setSelected(-1);
+    }
   }
 
   useEffect(() => {
@@ -36,7 +58,7 @@ const Navbar = () => {
         });
     }
   }, [search]);
-  console.log(suggestion);
+  // console.log(suggestion);
 
   return (
     <nav className="align_center navbar">
@@ -51,6 +73,7 @@ const Navbar = () => {
             placeholder="Search Product"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={handleKeys}
           />
 
           <button type="submit" className="search_button">
@@ -58,9 +81,13 @@ const Navbar = () => {
           </button>
           {suggestion.length > 0 && (
             <ul className="search_result">
-              {suggestion.map((suggestion) => (
+              {suggestion.map((suggestion, index) => (
                 <li
-                  className="search_suggestion_link"
+                  className={
+                    selected === index
+                      ? "search_suggestion_link active"
+                      : "search_suggestion_link"
+                  }
                   key={suggestion._id}
                   onClick={() => {
                     setSearch("");

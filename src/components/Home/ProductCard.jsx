@@ -28,7 +28,7 @@ const ProductCard = ({ product, id }) => {
         <footer className="align_center product_info_footer">
           <div className="align_center">
             <p className="align_center product_rating">
-              <img src={mac} alt="star" /> {product?.rate}
+              <img src={mac} alt="star" /> {product?.reviews.rate}
             </p>
             <p className="product_review_count">{product?.stock}</p>
           </div>
