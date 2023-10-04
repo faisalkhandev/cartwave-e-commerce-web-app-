@@ -1,4 +1,4 @@
-<h1><a href="https://cartwave.netlify.app/" >CartWave E-Commerce Web App</a></h1> 🛒🌐
+<h1><a href="https://cartwave.netlify.app/" >CartWave E-Commerce Web App 🛒🌐</a></h1>
 
 Welcome to the repository of our E-Commerce web application, CartWave, built with React.js, Node.js, and MongoDB. This project showcases a feature-rich online shopping experience with various functionalities to provide an excellent user experience. 🚀
 
