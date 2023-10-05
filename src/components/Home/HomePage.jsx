@@ -2,7 +2,7 @@ import HeroSection from "./HeroSection";
 import iphone from "../../../public/iphone_15.png";
 import mac from "../../../public/macbook.png";
 import FeatureProducts from "./FeatureProducts";
-import Footer from "../Footer/Footer";
+// import Footer from "../Footer/Footer";
 
 const HomePage = () => {
   return (
@@ -20,7 +20,7 @@ const HomePage = () => {
         image={mac}
         link="/products/651ce6cb907ce5634690b474"
       />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

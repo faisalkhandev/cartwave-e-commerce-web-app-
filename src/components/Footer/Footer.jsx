@@ -14,27 +14,6 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="column link">
-            <h3>Links</h3>
-            <ul>
-              <li>
-                <a href="#home">Home</a>
-              </li>
-              <li>
-                <a href="#team">Products</a>
-              </li>
-              <li>
-                <a href="#blogs">My Orders</a>
-              </li>
-              <li>
-                <a href="#support">Sign Up</a>
-              </li>
-              <li>
-                <a href="#login">Login</a>
-              </li>
-            </ul>
-          </div>
-
           <div className="column subscribe">
             <h3>Newsletter</h3>
             <div>
